@@ -1,0 +1,10 @@
+let string = "Hello World";
+let Number = 42;
+let Boolean = true;
+let Null = null;
+let Undifined = undefined;
+console.log(`myString: ${string} -Type: ${typeof string}`);
+console.log(`myNumber: ${Number} -Type: ${typeof Number}`);
+console.log(`myBoolean: ${Boolean} -Type: ${typeof Boolean}`);
+console.log(`myNull: ${Null} -Type: ${typeof Null}`);
+console.log(`myUndifined: ${Undifined} -Type: ${typeof Undefined}`);
