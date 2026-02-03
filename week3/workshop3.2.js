@@ -1,6 +1,6 @@
 const fetchDataWithCallback = (callback) => {
     setTimeout(() => {
-        const data = "Data fetched with Callback";
+        const data = { id : 1, name : 'bas' , email: 'bas@example' }
         callback(data);
     }, 2000);
 };
@@ -8,7 +8,7 @@ const fetchDataWithCallback = (callback) => {
 const fetchDataWithPromise = () => {
     return new Promise((resolve, reject) => {
         setTimeout(() => {
-            const data = "Data fetched with Promise";
+            const data = { id : 2, name : 'john' , email: 'john@example' };
             resolve(data);
         }, 2000);
     });
