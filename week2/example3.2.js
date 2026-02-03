@@ -14,6 +14,6 @@ function calculateBMI(weight, height) {
     }
 }
 
-calculateBMI(70,1.75)
-calculateBMI(50,1.60)
-calculateBMI(90,1.70)
+calculateBMI(70 , 1.75)
+calculateBMI(50 , 1.60)
+calculateBMI(90 , 1.70)
