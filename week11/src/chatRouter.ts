@@ -5,14 +5,14 @@ const router = Router();
 
 // POST /chat
 router.post("/", async (req: Request, res: Response) => {
-  const { message } = req.body;
+  const message = req.body?.message;
 
   if (!message || typeof message !== "string") {
     return res.status(400).json({ error: "message is required" });
   }
 
   try {
-    const reply = await askAI(message.trim()); // เรียกฟังก์ชัน askAI เพื่อดึงคำตอบจาก AI
+    const reply = await askAI(message.trim());
     res.json({ success: true, reply });
   } catch (err: any) {
     console.error("Chat error:", err);

@@ -1,14 +1,9 @@
-import {
-  GoogleGenerativeAI,
-  Tool,
-  FunctionDeclaration,
-  SchemaType,
-} from "@google/generative-ai";
+import { GoogleGenerativeAI, Tool, FunctionDeclaration, SchemaType } from "@google/generative-ai";
 import { getSchemaAsText } from "./schemaReader";
 
 const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY!);
 
-// Tool definition สำหรับ AI เรียก
+// Tool definition เพื่อให้ AI รู้จัก
 const tools: Tool[] = [
   {
     functionDeclarations: [
@@ -28,8 +23,7 @@ const tools: Tool[] = [
             },
             args: {
               type: SchemaType.OBJECT,
-              description:
-                "Prisma query arguments (where, select, orderBy, take, skip)",
+              description: "Prisma query arguments (where, select, orderBy, take, skip)",
               properties: {},
             },
           },
@@ -65,16 +59,13 @@ Rules:
   const chat = model.startChat();
   let response = await chat.sendMessage(userMessage);
 
-  // Handle function call loop
-  while (true) {
-    const calls = response.response.functionCalls();
-    if (!calls || calls.length === 0) break;
+  while (response.response.functionCalls()?.length) {
+    const calls = response.response.functionCalls()!;
 
     const results = await Promise.all(
       calls.map(async (call) => {
         const { runQuery } = await import("../tools/queryTool");
         const args = call.args as Record<string, unknown>;
-
         const result = await runQuery({
           ...args,
           model: args.model,
